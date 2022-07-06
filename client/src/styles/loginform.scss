@@ -1,0 +1,84 @@
+.register-form{
+    margin: 20px;
+
+    input{
+        display: block;
+        margin-bottom: 20px;
+        height: 50px;
+        width: 100%;
+        padding: 20px;
+        border: 2px solid #cdcdcd;
+        border-radius: 5px;
+    }
+
+    input:focus{
+        outline: none;
+        border: 2px solid #3ca7ff;
+    };
+
+    label{
+        display: block;
+        margin-bottom: 10px;
+    }
+
+    .title{
+        font-weight: bold;
+        font-size: 1.5em;
+        margin-bottom: 30px;
+    }
+
+    .form-get-name{
+        display: block;
+    }
+
+    .btn{
+        text-align: center;
+        button{
+            padding: 14px 50px;
+            border-radius: 8px;
+            background-color: black;
+            color: white;
+            font-size: 1em;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+    }
+}
+
+@media screen and (min-width: 500px){
+    .register-form{
+        margin: 20px 50px;
+    }
+}
+
+@media screen and (min-width: 768px){
+    .register-form{
+        margin: 3em 50px;
+        .title{
+            text-align: center;
+            font-size: 1.7em;
+        }
+
+        .form-get-name{
+            display: flex;
+            div{
+                flex: 1;
+            }
+            :nth-child(1){
+                margin-right: 10px;
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 1000px){
+    .register-form{
+        margin: 5em 10em;
+    }
+}
+
+@media screen and (min-width: 1200px){
+    .register-form{
+        margin: 5em 15em;
+    }
+}
