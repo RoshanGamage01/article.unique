@@ -3,7 +3,11 @@ nav{
     align-items: center;
     flex-direction: column;
     color: black;
+    background-color: white;
     padding: 20px;
+    position: sticky;
+    top: 0;
+   
     .logo{
         font-size: 1.2em;
         font-weight: bold;
@@ -14,7 +18,7 @@ nav{
         display: flex;
         list-style-type: none;
         li:not(:last-child){
-            margin-right: 10px;
+            margin-right: 20px;
             padding-bottom: 5px;
         }
         li:hover{
@@ -29,7 +33,6 @@ nav{
     a:visited{
         color: black;
     }
-
 }
 
 @media screen and (min-width: 500px){

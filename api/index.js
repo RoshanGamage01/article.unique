@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const config = require('config');
+const cors = require('cors');
 const user = require('./routes/users');
 const auth = require('./routes/auth');
 const express = require('express');
@@ -11,6 +12,7 @@ if(!config.get('jwtPrivateKey')){
 }
 
 app.use(express.json());
+app.use(cors());
 app.use('/api/user', user)
 app.use('/api/login', auth)
 
