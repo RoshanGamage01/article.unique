@@ -17,6 +17,9 @@ nav{
     ul{
         display: flex;
         list-style-type: none;
+        li{
+            cursor: pointer;
+        }
         li:not(:last-child){
             margin-right: 20px;
             padding-bottom: 5px;

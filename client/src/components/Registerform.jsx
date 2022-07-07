@@ -1,10 +1,12 @@
 import { useState } from "react";
 import axios from "axios";
 import "../styles/register_and_login_form.scss";
+import { useNavigate } from "react-router-dom";
 
 function Registerform() {
   const [data, setData] = useState({});
   const [res, setRes] = useState({});
+  const navigate = useNavigate();
 
   function btnRegisterOnAction() {
     const payload = {
@@ -19,6 +21,7 @@ function Registerform() {
             .then((result) => {
                 setRes(oldValue => ({...oldValue, data: result.data.message, status: result.status}))
                 localStorage.setItem('auth-token', result.data.token)
+                navigate("/")
             })
             .catch((error) => {
                 setRes(oldValue => ({...oldValue, data: error.response.data, status: error.response.status}))
