@@ -68,7 +68,10 @@ function Registerform() {
             />
           </div>
         </div>
-
+        <div className="form-get-image">
+          <label>Profile</label>
+          <button>Upload Image</button>
+        </div>
         <div className="form-get-security">
           <label>E-mail</label>
           <input

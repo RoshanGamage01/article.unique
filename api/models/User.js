@@ -29,6 +29,12 @@ const userSchema = new mongoose.Schema({
         required: true,
         minlength: 6,
         maxlength: 1024
+    },
+    profileImage: {
+        type: String,
+        default: "https://images.unsplash.com/photo-1511367461989-f85a21fda167?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cHJvZmlsZXxlbnwwfHwwfHw%3D&w=1000&q=80",
+        minlength: 6,
+        maxlength: 255
     }
 }, {timestamps: true});
 
@@ -44,7 +50,8 @@ function userValidate(request){
         firstName: Joi.string().min(1).max(255).required(),
         lastName: Joi.string().min(1).max(255).required(),
         email: Joi.string().min(5).max(255).required().email(),
-        password:  Joi.string().min(6).max(1024).required()
+        password:  Joi.string().min(6).max(1024).required(),
+        profileImage: Joi.string().min(1).max(255)
     }
 
     return Joi.validate(request, schema);

@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
+import '../styles/profile.scss'
 
 function Profile(){
     const [userData, setUserData ] = useState({});
@@ -12,12 +13,18 @@ function Profile(){
             setUserData(response.data)
         }).catch(error => console.log(error.response.data))
     }, [])
-
+    console.log(userData.profileImage)
     return (
         <section>
             <Navbar />
-            <h1>{userData.firstName} {userData.lastName}</h1>
-            <h1>{userData.email}</h1>
+            <div className="profile">
+                <div className="profile-photo" style={{background: `url('${userData.profileImage}')`}}></div>
+                <div className="bio">
+                    <div className="user-name">{userData.firstName} {userData.lastName}</div>
+                    <div className="user-email">{userData.email}</div>
+                </div>
+                <button>Edit profile</button>
+            </div>
         </section>
     )
 }
