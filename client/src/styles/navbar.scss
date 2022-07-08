@@ -24,9 +24,6 @@ nav{
             margin-right: 20px;
             padding-bottom: 5px;
         }
-        li:hover{
-            border-bottom: 3px solid black;
-        }
     }
 
     a{
@@ -53,7 +50,28 @@ nav{
         flex-direction: row;
         justify-content: space-between;
         align-items: baseline;
-
+        ul{
+            li:hover{
+                a:after{
+                    display: block;
+                    content: ' ';
+                    margin-top: 2px;
+                    height: 3px;
+                    border-radius: 1.5px;
+                    background-color: black;
+                    animation-name: hoverAnimation;
+                    animation-duration: 0.2s;
+                    animation-timing-function: ease-in-out;
+                }
+                @keyframes hoverAnimation {
+                    0%{
+                        width: 0;
+                    }100%{
+                        width: 100%;
+                    }
+                }
+            }
+        }
         .logo{
             margin-bottom: 0;
         }

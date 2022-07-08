@@ -1,0 +1,72 @@
+.article{
+    .article-cover{
+        width: 100vw;
+        height: 30vh;
+        background-size: cover !important;
+        background-position: center !important;
+        background-repeat: no-repeat !important;
+    }
+
+    .text-aria{
+        margin: 20px 20px;
+
+        .title{
+            font-size: 1.6em;
+            font-weight: bold;
+            margin-top: 20px;
+            
+        }
+
+        .time{
+            font-size: 12px;
+            margin-top: 10px;
+            margin-bottom: 50px;
+        }
+    
+        .desc{
+            font-size: 0.9em;
+            margin: 10px 0px;
+            font-weight: 300;
+            line-height: 1.6rem;
+            white-space: pre-line;
+        }
+    }
+    
+}
+
+@media screen and (min-width: 500px){
+    .article{
+        .text-aria{
+            margin: 20px 5em;
+        }
+    }
+}
+
+@media screen and (min-width: 768px){
+    .article{
+        .article-cover{
+            height: 50vh;
+        }
+
+        .text-aria{
+            margin: 20px 10em;
+        }
+    }
+}
+
+@media screen and (min-width: 1000px){
+    .article{
+        .text-aria{
+            margin: 20px 15em;
+        }
+    }
+}
+
+
+@media screen and (min-width: 1200px){
+    .article{
+        .text-aria{
+            margin: 20px 30em;
+        }
+    }
+}

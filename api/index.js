@@ -3,6 +3,7 @@ const config = require('config');
 const cors = require('cors');
 const user = require('./routes/users');
 const auth = require('./routes/auth');
+const article = require('./routes/article');
 const express = require('express');
 const app = express();
 
@@ -13,15 +14,16 @@ if(!config.get('jwtPrivateKey')){
 
 app.use(express.json());
 app.use(cors());
-app.use('/api/user', user)
-app.use('/api/login', auth)
+app.use('/api/user', user);
+app.use('/api/login', auth);
+app.use('/api/article', article);
 
 
 mongoose.connect("mongodb://localhost/Article")
     .then(console.log("Database Connected."))
-    .catch(error => console.log(error.message))
+    .catch(error => console.log(error.message));
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
-    console.log(`App working on port ${port}...`)
+    console.log(`App working on port ${port}...`);
 })

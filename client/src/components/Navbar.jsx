@@ -21,6 +21,7 @@ function Navbar(){
             <span className='logo'><Link to="/">UniqueArticle</Link></span>
             <ul>
                 <li><Link to="/">Home</Link></li>
+                <li><Link to="/article">Articles</Link></li>
                 <li style={isSignedIn() ? {display: 'none'} : {display: 'block'}}><Link to="/register">Register</Link></li>
                 <li style={isSignedIn() ? {display: 'none'} : {display: 'block'}}><Link to="/login">Log In</Link></li>
                 <li style={isSignedIn() ? {display: 'block'} : {display: 'none'}}><Link to="/me">Profile</Link></li>
