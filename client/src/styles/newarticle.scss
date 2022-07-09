@@ -1,0 +1,92 @@
+.article-form{
+    margin: 20px;
+    label{
+        display: block;
+    }
+    input{
+        height: 50px;
+        width: 100%;
+        padding: 20px;
+        letter-spacing: 1px;
+        border: 2px solid black;
+        border-radius: 5px;
+        margin-bottom: 20px;
+    }
+    input:focus{
+        outline: black;
+        
+    }
+    textarea{
+        width: 100%;
+        height: 200px;
+        border: 2px solid black;
+        border-radius: 5px;
+        padding: 10px;
+    }
+    textarea:focus{
+        outline: black;
+    }
+
+    .btns{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        .cover-image-btn, .publish-btn{
+            display: block;
+            padding: 14px 28px;
+            width: 100%;
+            border: none;
+            border: 2px solid black;
+            border-radius: 5px;
+            color: white;
+            background-color: black;
+            transition: 0.3s ease;
+            cursor: pointer;
+            margin: 10px 0;
+        }
+        .cover-image-btn:hover{
+            border: 2px solid black;
+            background-color: white;
+            color: black;
+        }
+        .cover-image-btn:active{
+            background-color: black;
+            color: white;
+        }
+    
+        .publish-btn{
+            border-color: none;
+            background-color: white;
+            color: black;
+        }
+    
+        .publish-btn:hover{
+            background-color: black;
+            color: white;
+        }
+        .publish-btn:active{
+            background-color: white;
+            color: black;
+        }
+    }
+
+    
+}
+
+@media screen and (min-width: 500px){
+    .article-form{
+        margin: 20px 5em;
+    }
+}
+
+@media screen and (min-width: 768px){
+    .article-form{
+        margin: 30px 10em;
+    }
+}
+
+@media screen and (min-width: 1200px){
+    .article-form{
+        margin: 40px 15em;
+    }
+}

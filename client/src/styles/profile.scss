@@ -32,6 +32,7 @@
         border-radius: 5px;
         border: 2px solid black;
         transition: 0.3s;
+        cursor: pointer;
     }
     button:hover{
         color: black;
@@ -43,8 +44,59 @@
     }
 }
 
+.captions{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 20px;
+    font-size: 1.2em;
+    font-weight: 500;
+    div{
+        font-size: 0.7em;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+    }
+}
+
 @media screen and (min-width: 500px){
     .profile{
         margin-top: 50px;
+    }
+    .captions{
+        margin: 0 2em;
+    }
+}
+
+@media screen and (min-width: 768px){
+        .profile{
+            .bio{
+                .user-name{
+                    font-size: 2em;
+                }
+                .user-email{
+                    font-size: 1em;
+                }
+                
+            }
+        }
+        .articles{
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .captions{
+            margin-bottom: 20px;
+        }
+}
+
+@media screen and (min-width: 1000px){
+    .articles, .captions{
+        margin: 10px 10em;
+    }
+}
+
+@media screen and (min-width: 1200px){
+    .articles, .captions{
+        margin: 20px 15em;
     }
 }

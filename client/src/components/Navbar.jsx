@@ -25,7 +25,7 @@ function Navbar(){
                 <li style={isSignedIn() ? {display: 'none'} : {display: 'block'}}><Link to="/register">Register</Link></li>
                 <li style={isSignedIn() ? {display: 'none'} : {display: 'block'}}><Link to="/login">Log In</Link></li>
                 <li style={isSignedIn() ? {display: 'block'} : {display: 'none'}}><Link to="/me">Profile</Link></li>
-                <li style={isSignedIn() ? {display: 'block'} : {display: 'none'}} onClick={btnLogOutOnAction}>Log out</li>
+                <li style={isSignedIn() ? {display: 'block'} : {display: 'none'}} onClick={btnLogOutOnAction}><Link to="/">Log out</Link></li>
             </ul>
         </nav>
     )

@@ -2,14 +2,17 @@ const express = require('express');
 const router = express.Router();
 const auth = require('../middlewares/auth')
 const { User, validate } = require('../models/User');
+const { Article } = require('../models/Article');
 const bcrypt = require('bcrypt');
 const _ = require('lodash');
 
 router.get('/me', auth, async (req, res) => {
-    const me = await User.findOne({_id: req.user.id}).select("-_id -password")
+    const me = await User.findOne({_id: req.user.id}).select("-password")
+    const article = await Article.find({writer: req.user.id})
 
-    res.send(me)
+    res.send({me, article})
 })
+
 
 router.post('/register', async (req, res) => {
     const { error } = validate(req.body);

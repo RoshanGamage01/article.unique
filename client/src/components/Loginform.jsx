@@ -13,7 +13,7 @@ function Loginform() {
         .then(result => {
           setRes(oldValue => ({...oldValue, data: result.data.message, status: result.status}))
           localStorage.setItem('auth-token', result.data.token);
-          navigate("/");
+          navigate("/me");
         })
         .catch(error => {
           setRes(oldValue => ({...oldValue, data: error.response.data, status: error.response.status}))

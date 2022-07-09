@@ -6,6 +6,7 @@ import LoginUser from "./pages/LoginUser";
 import Profile from "./pages/Profile";
 import Article from "./pages/Article";
 import Reading from "./pages/Reading";
+import CreateArticle from "./pages/CreateArticle";
 
 function App(){
     return (
@@ -16,6 +17,7 @@ function App(){
                 <Route path="/me" element={<Profile />}/>
                 <Route path="/article" element={<Article />}/>
                 <Route path="/article/:id" element={<Reading />}/>
+                <Route path="/article/new/:id" element={<CreateArticle/>}/>
            </Routes>
     )
 }

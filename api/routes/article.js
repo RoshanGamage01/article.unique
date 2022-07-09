@@ -1,6 +1,7 @@
 const { Article, validate } = require('../models/Article');
 const _ = require('lodash');
 const express = require('express');
+const auth = require('../middlewares/auth');
 const router = express.Router();
 
 router.get("/:id", async (req, res) => {

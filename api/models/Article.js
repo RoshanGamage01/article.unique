@@ -26,7 +26,6 @@ const articleSchema = new mongoose.Schema({
     },
     category: {
         type: Array,
-        required: true
     },
     time: {
         type: Date,

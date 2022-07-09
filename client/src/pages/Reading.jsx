@@ -10,7 +10,7 @@ function Reading(){
 
     useEffect(()=>{
         getData()
-    })
+    },[])
 
     async function getData(){
         await axios.get(`http://localhost:3000/api/article/${linkProps.id}`)
@@ -20,7 +20,7 @@ function Reading(){
                 setArticle(data)
             })
     }
-
+    console.log()
     return (
         <section>
             <Navbar/>
