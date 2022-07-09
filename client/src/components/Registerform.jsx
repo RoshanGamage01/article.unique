@@ -14,6 +14,7 @@ function Registerform() {
         lastName: data.last_name,
         email: data.email,
         password: data.password,
+        profileImage: data.image
       }
     
     try{
@@ -70,6 +71,7 @@ function Registerform() {
         </div>
         <div className="form-get-image">
           <label>Profile</label>
+          <input type={"text"} placeholder="URL" value={data.image || ''} name="image" onChange={addValue}/>
           <button>Upload Image</button>
         </div>
         <div className="form-get-security">

@@ -29,7 +29,7 @@ function Reading(){
                 <div className="text-aria">
                     <div className="title">{article.title}</div>
                     <div className="time">{article.time}</div>
-                    <div className="desc">{article.description}</div>
+                    <div className="desc"><p dangerouslySetInnerHTML={{__html: article.description}}></p></div>
                 </div>
             </div>
         </section>
