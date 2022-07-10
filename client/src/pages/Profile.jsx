@@ -51,7 +51,7 @@ function Profile() {
           <div className="user-email">{userData.me.email}</div>
         </div>
         <button>Edit profile</button>
-        <Link to="/" onClick={btnLogOutOnAction} className="logout-btn"><img src={logoutIcon} width="20px"/>Log Out</Link>
+        <Link to="/" onClick={btnLogOutOnAction} className="logout-btn"><img src={logoutIcon} width="20px" alt="logout"/>Log Out</Link>
       </div>
       <div className="captions">
         <span>My Articles</span>

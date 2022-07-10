@@ -5,7 +5,7 @@ import axios from "axios";
 
 function Navbar() {
   const navigate = useNavigate();
-  const [profile, setProfile] = useState("");
+  const [profile, setProfile] = useState({});
   const token = localStorage.getItem("auth-token");
 
   useEffect(() => {
@@ -15,7 +15,7 @@ function Navbar() {
           headers: { "x-auth-token": token },
         })
         .then((response) => {
-          setProfile(response.data.me.profileImage);
+          setProfile(response.data.me);
         })
         .catch((error) => console.log(error.response.data));
     }
@@ -31,6 +31,7 @@ function Navbar() {
     navigate("/");
   }
 
+  console.log(profile)
   return (
     <nav>
       <span className="logo">
@@ -54,11 +55,11 @@ function Navbar() {
             <Link to="/me">
               <div
                 className="profile-photo"
-                style={{ background: `url(${profile})` }}
+                style={{ background: `url(${profile.profileImage})` }}
               ></div>
             </Link>
             <div className="navbar-profile-options">
-              <Link to="/me">Profile</Link>
+              <Link to="/me">{profile.firstName}'s Profile</Link>
               <Link to="/" onClick={btnLogOutOnAction}>
                 Log out
               </Link>
