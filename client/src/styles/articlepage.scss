@@ -15,33 +15,32 @@
     }
 }
 
-.post{
-    margin-top: 10px;
-}
-
 
 @media screen and (min-width: 500px){
-    .post{
-        margin-top: 30px;
+    .articles{
+        max-width: 700px;
+        margin: 0 auto;
     }
 }
 
 @media screen and (min-width: 768px){
-    .post{
-        display: flex;
-        flex-wrap: wrap;
-        margin: 0 5em;
-    }
+        .articles{
+            max-width: 680px;
+            .post{
+                display: flex;
+                flex-wrap: wrap;
+                
+            }
+        }
+        
 }
 
 @media screen and (min-width: 1000px){
-    .post{
-        margin: 0 10em;
+    .articles{
+        max-width: 1020px;
     }
 }
 
 @media screen and (min-width: 1200px){
-    .post{
-        margin: 0 15em;
-    }
+    
 }

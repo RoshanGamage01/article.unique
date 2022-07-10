@@ -13,6 +13,12 @@ router.get('/me', auth, async (req, res) => {
     res.send({me, article})
 })
 
+router.get('/:id', async (req, res) => {
+    const user = await User.findById(req.params.id).select("-_id -password -email -profileImage");
+    if(!user) return res.status(404).send("User does not exist")
+
+    res.send(user)
+})
 
 router.post('/register', async (req, res) => {
     const { error } = validate(req.body);
