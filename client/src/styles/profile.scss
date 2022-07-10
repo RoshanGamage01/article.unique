@@ -42,6 +42,15 @@
         background-color: black;
         color: white;
     }
+
+    .logout-btn{
+        display: flex;
+        align-items: center;
+        color: #da0000;
+        img{
+            margin-right: 10px;
+        }
+    }
 }
 
 .captions{

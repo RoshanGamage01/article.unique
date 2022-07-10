@@ -11,18 +11,31 @@ nav{
     .logo{
         font-size: 1.2em;
         font-weight: bold;
-        margin-bottom: 20px;
     }
 
     ul{
+        margin-top: 20px;
         display: flex;
         list-style-type: none;
         li{
             cursor: pointer;
+            .profile-link{
+                position: relative;
+                .profile-photo{
+                    width: 30px;
+                    height: 30px;
+                    border-radius: 50%;
+                    background-position: center !important;
+                    background-size: cover !important;
+                    background-repeat: no-repeat;
+                }
+                .navbar-profile-options{
+                    display: none;
+                }
+            }
         }
         li:not(:last-child){
             margin-right: 20px;
-            padding-bottom: 5px;
         }
     }
 
@@ -51,11 +64,69 @@ nav{
         justify-content: space-between;
         align-items: baseline;
         ul{
-            li:hover{
+            margin-top: 0;
+            li{
+                .navbar-profile-options{
+                    position: absolute;
+                    z-index: 100;
+                    margin-top: 10px;
+                    display: block;
+                    visibility: hidden;
+                    top: 30px;
+                    width: 200px;
+                    padding: 10px;
+                    border-radius: 10px;
+                    background-color: black;
+
+                    a{
+                        display: block;
+                        position: relative;
+                        padding: 10px;
+                        background-color: black;
+                        color: white;
+                        border: 2px solid transparent;
+                        border-radius: 5px;
+                        top: -20px;
+                        margin: 10px 0;
+                    }
+
+                    a:hover{
+                        border: 2px solid white;
+                    }
+                }
+
+                .navbar-profile-options:before{
+                    display: block;
+                    position: relative;
+                    top: -29px;
+                    right: 3px;
+                    content: '';
+                    width: 0px;
+                    height: 0px;
+                    border-left: 10px solid transparent;
+                    border-top: 10px solid transparent;
+                    border-right: 10px solid transparent;
+                    border-bottom: 10px solid black;
+                }
+
+                .profile-link:hover .navbar-profile-options{
+                    visibility: visible;
+                    animation: menuAnIn 0.5s ease;
+                }
+
+                @keyframes menuAnIn {
+                    0%{
+                        opacity: 0;
+                    }
+                    100%{
+                        opacity: 100%;
+                    }
+                }
+            }
+            li:not(:last-child):hover{
                 a:after{
                     display: block;
                     content: ' ';
-                    margin-top: 2px;
                     height: 3px;
                     border-radius: 1.5px;
                     background-color: black;

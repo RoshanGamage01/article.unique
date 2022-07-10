@@ -15,8 +15,9 @@ function Articleprev(props) {
       })
       .catch(error => console.log(error.response.data))
   }, [])
+
   return (
-    <Link to={"/article/"+props.data._id}>
+    <Link to={"/article/"+props.data._id+"?writer="+writer}>
       <div className="article-prev-card">
         <div className="cover">
           <img src={props.data.image} alt="article cover" />

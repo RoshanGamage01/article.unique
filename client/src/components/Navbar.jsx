@@ -1,34 +1,73 @@
-import '../styles/navbar.scss';
-import { Link, useNavigate } from 'react-router-dom';
+import "../styles/navbar.scss";
+import { Link, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
+function Navbar() {
+  const navigate = useNavigate();
+  const [profile, setProfile] = useState("");
+  const token = localStorage.getItem("auth-token");
 
-
-function Navbar(){
-    const navigate = useNavigate();
-
-    function isSignedIn(){
-        if(localStorage.getItem('auth-token')) return true;
-        return false;
+  useEffect(() => {
+    if (isSignedIn()) {
+      axios
+        .get("http://localhost:3000/api/user/me", {
+          headers: { "x-auth-token": token },
+        })
+        .then((response) => {
+          setProfile(response.data.me.profileImage);
+        })
+        .catch((error) => console.log(error.response.data));
     }
+  }, []);
 
-    function btnLogOutOnAction(){
-        localStorage.removeItem('auth-token');
-        navigate("/")
-    }
+  function isSignedIn() {
+    if (token) return true;
+    return false;
+  }
 
-    return (
-        <nav>
-            <span className='logo'><Link to="/">UniqueArticle</Link></span>
-            <ul>
-                <li><Link to="/">Home</Link></li>
-                <li><Link to="/article">Articles</Link></li>
-                <li style={isSignedIn() ? {display: 'none'} : {display: 'block'}}><Link to="/register">Register</Link></li>
-                <li style={isSignedIn() ? {display: 'none'} : {display: 'block'}}><Link to="/login">Log In</Link></li>
-                <li style={isSignedIn() ? {display: 'block'} : {display: 'none'}}><Link to="/me">Profile</Link></li>
-                <li style={isSignedIn() ? {display: 'block'} : {display: 'none'}} onClick={btnLogOutOnAction}><Link to="/">Log out</Link></li>
-            </ul>
-        </nav>
-    )
+  function btnLogOutOnAction() {
+    localStorage.removeItem("auth-token");
+    navigate("/");
+  }
+
+  return (
+    <nav>
+      <span className="logo">
+        <Link to="/">UniqueArticle</Link>
+      </span>
+      <ul>
+        <li>
+          <Link to="/">Home</Link>
+        </li>
+        <li>
+          <Link to="/article">Articles</Link>
+        </li>
+        <li style={isSignedIn() ? { display: "none" } : { display: "block" }}>
+          <Link to="/register">Register</Link>
+        </li>
+        <li style={isSignedIn() ? { display: "none" } : { display: "block" }}>
+          <Link to="/login">Log In</Link>
+        </li>
+        <li style={isSignedIn() ? { display: "block" } : { display: "none" }}>
+          <div className="profile-link">
+            <Link to="/me">
+              <div
+                className="profile-photo"
+                style={{ background: `url(${profile})` }}
+              ></div>
+            </Link>
+            <div className="navbar-profile-options">
+              <Link to="/me">Profile</Link>
+              <Link to="/" onClick={btnLogOutOnAction}>
+                Log out
+              </Link>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </nav>
+  );
 }
 
 export default Navbar;

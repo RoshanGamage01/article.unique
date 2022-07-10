@@ -5,6 +5,7 @@ import Navbar from "../components/Navbar";
 import "../styles/profile.scss";
 import add from "../icons/add_FILL0_wght400_GRAD0_opsz24.png"
 import { Link } from "react-router-dom";
+import logoutIcon from "../icons/logout_FILL0_wght400_GRAD0_opsz40.png"
 
 function Profile() {
   const [userData, setUserData] = useState({
@@ -30,6 +31,11 @@ function Profile() {
       })
       .catch((err) => console.log(err.response.data));
   }
+
+  function btnLogOutOnAction() {
+    localStorage.removeItem("auth-token");
+  }
+
   return (
     <section>
       <Navbar />
@@ -45,6 +51,7 @@ function Profile() {
           <div className="user-email">{userData.me.email}</div>
         </div>
         <button>Edit profile</button>
+        <Link to="/" onClick={btnLogOutOnAction} className="logout-btn"><img src={logoutIcon} width="20px"/>Log Out</Link>
       </div>
       <div className="captions">
         <span>My Articles</span>
