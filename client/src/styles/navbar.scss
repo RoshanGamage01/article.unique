@@ -22,15 +22,15 @@ nav {
       .profile-link {
         position: relative;
         .profile-photo {
-          width: 30px;
-          height: 30px;
+          width: 25px;
+          height: 25px;
           border-radius: 50%;
           background-position: center !important;
           background-size: cover !important;
           background-repeat: no-repeat;
         }
         .navbar-profile-options {
-          visibility: hidden;
+          display: none;
         }
       }
     }
@@ -74,14 +74,15 @@ nav {
           position: absolute;
           z-index: 100;
           margin-top: 10px;
-          display: block;
+          display: block !important;
           visibility: hidden;
-          top: 30px;
+          top: 25px;
+          right: -10px;
           width: 200px;
           padding: 10px;
           border-radius: 10px;
           background-color: black;
-
+          transition: 0.3 ease;
           a {
             display: block;
             position: relative;
@@ -89,13 +90,12 @@ nav {
             background-color: black;
             color: white;
             border: 2px solid transparent;
-            border-radius: 5px;
             top: -20px;
             margin: 10px 0;
           }
 
           a:hover {
-            border: 2px solid white;
+            border-bottom: 2px solid white;
           }
         }
 
@@ -103,7 +103,7 @@ nav {
           display: block;
           position: relative;
           top: -29px;
-          right: 3px;
+          right: -158px;
           content: "";
           width: 0px;
           height: 0px;

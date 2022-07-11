@@ -30,8 +30,6 @@ function Navbar() {
     localStorage.removeItem("auth-token");
     navigate("/");
   }
-
-  console.log(profile)
   return (
     <nav>
       <span className="logo">

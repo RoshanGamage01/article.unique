@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { useParams, useLocation } from "react-router-dom";
+import { useParams, useLocation, Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import "../styles/reading.scss";
 
@@ -16,14 +16,14 @@ function Reading(props) {
 
   async function getData() {
     await axios
-      .get(`http://localhost:3000/api/article/${linkProps.id}`)
+      .get(`http://localhost:3000/api/article/${linkProps.id}`, {headers: {"x-auth-token": localStorage.getItem("auth-token")}})
       .then((response) => {
         const data = response.data;
         data.time = data.time.slice(0, 10);
         setArticle(data);
       });
   }
-  console.log();
+  console.log(article);
   return (
     <section>
       <Navbar />
@@ -31,7 +31,9 @@ function Reading(props) {
         <div
           className="article-cover"
           style={{ background: `url('${article.image}')` }}
-        ></div>
+        >
+          <Link to="/me" style={article.canEdit ? {display: 'flex'} : {display: 'none'}}>Edit Article</Link>
+        </div>
         <div className="text-aria">
           <div className="title">{article.title}</div>
           <div className="time">{article.time}</div>
