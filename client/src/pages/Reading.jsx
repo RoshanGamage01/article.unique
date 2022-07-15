@@ -9,7 +9,6 @@ function Reading(props) {
   const writer = new URLSearchParams(useLocation().search);
   const [article, setArticle] = useState({});
 
-
   useEffect(() => {
     getData();
   }, []);
@@ -23,7 +22,7 @@ function Reading(props) {
         setArticle(data);
       });
   }
-  console.log(article);
+
   return (
     <section>
       <Navbar />
@@ -32,7 +31,7 @@ function Reading(props) {
           className="article-cover"
           style={{ background: `url('${article.image}')` }}
         >
-          <Link to="/me" style={article.canEdit ? {display: 'flex'} : {display: 'none'}}>Edit Article</Link>
+          <Link to={`/article/update/${linkProps.id}`} style={article.canEdit ? {display: 'flex'} : {display: 'none'}}>Edit Article</Link>
         </div>
         <div className="text-aria">
           <div className="title">{article.title}</div>

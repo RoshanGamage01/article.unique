@@ -79,6 +79,7 @@ nav {
           top: 25px;
           right: -10px;
           width: 200px;
+          height: 150px;
           padding: 10px;
           border-radius: 10px;
           background-color: black;
@@ -92,10 +93,12 @@ nav {
             border: 2px solid transparent;
             top: -20px;
             margin: 10px 0;
+            transition: ease;
+            border-radius: 5px;
           }
 
           a:hover {
-            border-bottom: 2px solid white;
+            background-color: rgb(40, 40, 40);
           }
         }
 

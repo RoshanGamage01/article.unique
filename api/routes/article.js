@@ -53,4 +53,15 @@ router.post("/new", async (req, res) => {
   res.send(`${article.title} is published`);
 });
 
+router.put('/update/:id', auth, async (req, res) => {
+  const article = await Article.findByIdAndUpdate(req.params.id, {
+    title: req.body.title,
+    description: req.body.description,
+    image: req.body.image
+  });
+  if(!article) res.status(400).send('Update Failed')
+
+  res.send(article)
+})
+
 module.exports = router;

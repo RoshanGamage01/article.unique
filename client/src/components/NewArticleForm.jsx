@@ -32,7 +32,7 @@ function NewArticleForm(props) {
 
   return (
     <div className="article-form">
-      <div className="title">
+        <div className="title">Write your Article</div>
         <label>Title</label>
         <input
           type={"text"}
@@ -41,15 +41,12 @@ function NewArticleForm(props) {
           placeholder="Title of your article"
           name="title"
         />
-      </div>
-      <div className="content">
         <label>Content</label>
         <textarea
           value={articleData.desc || ""}
           onChange={addValue}
           name="desc"
         />
-      </div>
       <input
         type={"text"}
         placeholder="image url"
