@@ -1,3 +1,4 @@
 {
-    "jwtPrivateKey": "uniquearticle_jwtPrivateKey"
+    "jwtPrivateKey": "uniquearticle_jwtPrivateKey",
+    "databasePassword": "uniquearticle_databasePassword"
 }

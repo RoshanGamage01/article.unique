@@ -1,38 +1,14 @@
 import { useState } from "react";
-import axios from "axios";
+import {useNavigate} from "react-router-dom";
+import axios from 'axios';
 import "../styles/register_and_login_form.scss";
-import { useNavigate } from "react-router-dom";
 
 function Registerform() {
-  const [data, setData] = useState({});
   const [res, setRes] = useState({});
-  const navigate = useNavigate();
-
-  function btnRegisterOnAction() {
-    const payload = {
-        firstName: data.first_name,
-        lastName: data.last_name,
-        email: data.email,
-        password: data.password,
-        profileImage: data.image
-      }
-    
-    try{
-        axios.post("http://localhost:3000/api/user/register", payload)
-            .then((result) => {
-                setRes(oldValue => ({...oldValue, data: result.data.message, status: result.status}))
-                localStorage.setItem('auth-token', result.data.token)
-                navigate("/")
-            })
-            .catch((error) => {
-                setRes(oldValue => ({...oldValue, data: error.response.data, status: error.response.status}))
-            });
-    }catch (err){
-        console.log(err.message)
-    }
-
-    
-  }
+  const [data, setData] = useState({});
+  const [file, setFile] = useState({});
+  const [fileName, setFileName] = useState("Select Profile Image");
+  const navigate = useNavigate()
 
   function addValue(event) {
     const key = event.target.name;
@@ -40,12 +16,47 @@ function Registerform() {
     setData((oldValue) => ({ ...oldValue, [key]: value }));
   }
 
+  function btnRegisterOnClick() {
+    const imageFile = file.profileImage;
+    const formData = new FormData();
+    formData.append("firstName",data.firstName);
+    formData.append("lastName",data.lastName);
+    formData.append("email",data.email);
+    formData.append("password", data.password);
+    formData.append("profileImage", imageFile);
 
+    try{
+          axios.post("http://localhost:3000/api/user/register", formData, {headers: {'Content-Type': 'multipart/form-data'}})
+              .then((result) => {
+                  setRes(oldValue => ({...oldValue, data: result.data.message, status: result.status}))
+                  localStorage.setItem('auth-token', result.data.token)
+                  navigate("/")
+                  // console.log(result.data)
+              })
+              .catch((error) => {
+                  setRes(oldValue => ({...oldValue, data: error.response.data, status: error.response.status}))
+              });
+          }catch (err){
+              console.log(err.message)
+          }
+  }
+
+  function addFile(event){
+    setFileName(event.target.files[0].name)
+    const key = event.target.name;
+    const value = event.target.files[0];
+    setFile((oldValue) => ({ ...oldValue, [key]: value }))
+  }
 
   return (
     <section className="form">
       <div className="title">Register</div>
-      <div className={`alert ${res.status === 200 ? "alert-done" : "alert-error"}`} style={res.data ? {display:'block'} : {display:'none'}}>{ res.data }</div>
+      <div
+        className={`alert ${res.status === 200 ? "alert-done" : "alert-error"}`}
+        style={res.data ? { display: "block" } : { display: "none" }}
+      >
+        {res.data}
+      </div>
       <div className="form-main">
         <div className="form-get-name">
           <div>
@@ -53,8 +64,8 @@ function Registerform() {
             <input
               type="text"
               placeholder="First Name"
-              name="first_name"
-              value={data.firstName}
+              name="firstName"
+              value={data.firstName || ""}
               onChange={addValue}
             />
           </div>
@@ -63,17 +74,21 @@ function Registerform() {
             <input
               type="text"
               placeholder="Last Name"
-              name="last_name"
-              value={data.lastName}
+              name="lastName"
+              value={data.lastName || ""}
               onChange={addValue}
             />
           </div>
         </div>
+        {/* get image  */}
         <div className="form-get-image">
-          <label>Profile</label>
-          <input type={"text"} placeholder="URL" value={data.image || ''} name="image" onChange={addValue}/>
-          <button>Upload Image</button>
+          <label>
+            Label
+            <input type={"file"} name="profileImage" onChange={addFile}/>
+            <div>{fileName}</div>
+          </label>
         </div>
+
         <div className="form-get-security">
           <label>E-mail</label>
           <input
@@ -93,7 +108,7 @@ function Registerform() {
           />
         </div>
         <div className="btn">
-          <button onClick={btnRegisterOnAction}>Register</button>
+          <button onClick={btnRegisterOnClick}>Register</button>
         </div>
       </div>
     </section>
@@ -101,3 +116,5 @@ function Registerform() {
 }
 
 export default Registerform;
+
+

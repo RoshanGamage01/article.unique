@@ -4,9 +4,8 @@ import { useParams, useLocation, Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import "../styles/reading.scss";
 
-function Reading(props) {
+function Reading() {
   const linkProps = useParams();
-  const writer = new URLSearchParams(useLocation().search);
   const [article, setArticle] = useState({});
 
   useEffect(() => {
@@ -39,7 +38,7 @@ function Reading(props) {
           <div className="desc">
             <p dangerouslySetInnerHTML={{ __html: article.description }}></p>
           </div>
-          <div className="profile-name">- {writer.get('writer')} -</div>
+          <div className="profile-name">- {article.writer} -</div>
         </div>
       </div>
     </section>

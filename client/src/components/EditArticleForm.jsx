@@ -52,15 +52,6 @@ function EditArticleForm(props) {
           onChange={addValues}
         />
       </div>
-      <div>
-        <label>Image Url</label>
-        <input
-          type="text"
-          value={articleData.image || ""}
-          name="image"
-          onChange={addValues}
-        />
-      </div>
       <button onClick={btnUpdateArticleOnChange}>Update Article</button>
     </div>
   );

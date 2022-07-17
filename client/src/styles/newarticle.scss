@@ -10,6 +10,7 @@
 
     label{
         display: block;
+        margin-top: 20px;
     }
     input{
         height: 50px;
@@ -18,7 +19,6 @@
         letter-spacing: 1px;
         border: none;
         border-bottom: 2px solid rgb(192, 191, 191);
-        margin-bottom: 20px;
         transition: 0.2s ease-in;
     }
     input:focus, textarea:focus{
@@ -41,45 +41,21 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        .cover-image-btn, .publish-btn{
-            display: block;
-            padding: 14px 28px;
-            width: 100%;
-            border: none;
-            border: 2px solid black;
-            border-radius: 5px;
-            color: white;
-            background-color: black;
-            transition: 0.3s ease;
-            cursor: pointer;
-            margin: 10px 0;
-        }
-        .cover-image-btn:hover{
-            border: 2px solid black;
-            background-color: white;
-            color: black;
-        }
-        .cover-image-btn:active{
-            background-color: black;
-            color: white;
-        }
-    
-        .publish-btn{
-            border-color: none;
-            background-color: white;
-            color: black;
-        }
-    
-        .publish-btn:hover{
-            background-color: black;
-            color: white;
-        }
-        .publish-btn:active{
-            background-color: white;
-            color: black;
-        }
     }
 
+    .get-cover-image{
+        input{
+            display: none;
+        }
+        div{
+            margin-top: 10px;
+            padding: 10px;
+            background-color: black;
+            color: white;
+            border-radius: 5px;
+            text-align: center;
+        }
+    }
     
 }
 

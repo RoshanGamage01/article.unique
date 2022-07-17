@@ -1,18 +1,23 @@
 const { Article, validate } = require("../models/Article");
+const { User } = require('../models/User');
 const _ = require("lodash");
 const express = require("express");
 const auth = require("../middlewares/auth");
 const router = express.Router();
 const jwt = require("jsonwebtoken");
 const config = require("config");
+const path = require("path");
 
 router.get("/:id", async (req, res) => {
   const article = await Article.findById(req.params.id);
   if (!article) return res.status(404).send("Can't find article");
 
+  const user = await User.findById(article.writer)
+  if(!user) user.firstName = "none";
+
   let response = {
     title: article.title,
-    writer: article.writer,
+    writer: user.firstName,
     image: article.image,
     description: article.description,
     time: article.time,
@@ -41,11 +46,34 @@ router.get("/", async (req, res) => {
 });
 
 router.post("/new", async (req, res) => {
+  let coverImage;
+  let uploadPath;
+
+  if(!req.files || Object.keys(req.files).length === 0){
+    return res.status(400).send('No files were uploaded');
+  }
+
+  coverImage = req.files.coverImage;
+  let fileName = new Date().getTime().toString() + path.extname(coverImage.name);
+  uploadPath = path.join(__dirname+"/../public","coverimages/")+fileName;
+
+  coverImage.mv(uploadPath, (err)=>{
+    if (err) return res.status(500).send(err);
+  });
+
   const { error } = validate(req.body);
   if (error) return res.status(400).send(error.details[0].message);
 
+  const articleData = {
+    writer: req.body.writer,
+    title: req.body.title,
+    description: req.body.description,
+    category: req.body.category,
+    image: `${req.protocol}://${req.get("host")}/coverimages/${fileName}`
+  }
+
   const article = await new Article(
-    _.pick(req.body, ["writer", "title", "description", "image", "category"])
+    _.pick(articleData, ["writer", "title", "description", "image", "category"])
   );
 
   await article.save();
