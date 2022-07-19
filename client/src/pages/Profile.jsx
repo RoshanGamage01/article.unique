@@ -6,6 +6,7 @@ import "../styles/profile.scss";
 import add from "../icons/add_FILL0_wght400_GRAD0_opsz24.png"
 import { Link } from "react-router-dom";
 import logoutIcon from "../icons/logout_FILL0_wght400_GRAD0_opsz40.png"
+import Footer from "../components/Footer";
 
 function Profile() {
   const [userData, setUserData] = useState({
@@ -65,6 +66,7 @@ function Profile() {
           return <Articleprev data={item} key={item._id} />;
         })}
       </div>
+      <Footer/>
     </section>
   );
 }

@@ -45,6 +45,13 @@ router.get("/", async (req, res) => {
   res.send(article);
 });
 
+router.get("/post/recent/", async (req, res) => {
+  const article = await Article.find().sort({time: -1});
+  if (!article) return res.status(404).send("Can't find article");
+  
+  res.send(article[0])
+})
+
 router.post("/new", async (req, res) => {
   let coverImage;
   let uploadPath;

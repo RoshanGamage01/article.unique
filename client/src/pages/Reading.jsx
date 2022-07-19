@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { useParams, useLocation, Link } from "react-router-dom";
+import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import "../styles/reading.scss";
 
@@ -41,6 +42,7 @@ function Reading() {
           <div className="profile-name">- {article.writer} -</div>
         </div>
       </div>
+      <Footer/>
     </section>
   );
 }

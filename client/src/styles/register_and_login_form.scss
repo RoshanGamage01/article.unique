@@ -1,6 +1,5 @@
 .form{
     margin: 20px;
-
     input{
         display: block;
         margin-bottom: 20px;
@@ -125,5 +124,6 @@
 @media screen and (min-width: 1200px){
     .form{
         margin: 5em 15em;
+        margin-bottom: 10em;
     }
 }

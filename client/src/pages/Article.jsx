@@ -1,44 +1,15 @@
 import Navbar from "../components/Navbar";
-import Articleprev from "../components/Articleprev";
-import "../styles/articlepage.scss";
-import { useState, useEffect } from "react";
-import axios from "axios";
-import searchIco from "../icons/search_FILL0_wght400_GRAD200_opsz40.png";
+import ArticleList from "../components/ArticleList";
+import Footer from "../components/Footer";
 
 function Article() {
-  const [articles, setArticles] = useState([]);
 
-  useEffect(() => {
-    getArticles();
-  }, []);
-
-  async function getArticles() {
-    await axios
-      .get("http://localhost:3000/api/article/")
-      .then((response) => {
-        setArticles(response.data);
-      })
-      .catch((error) => {
-        console.log(error.response.data);
-      });
-  }
 
   return (
     <section>
       <Navbar />
-      <div className="serch-bar">
-        <input text="text" placeholder="Search" />
-        <img src={searchIco} alt="search-ico" />
-      </div>
-      <div className="articles">
-        <div className="post">
-          {articles.map((item) => {
-            return (
-              <Articleprev className="grid-item" data={item} key={item._id} />
-            );
-          })}
-        </div>
-      </div>
+      <ArticleList/>
+      <Footer/>
     </section>
   );
 }

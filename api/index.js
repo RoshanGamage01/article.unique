@@ -32,9 +32,9 @@ app.use('/api/login', auth);
 app.use('/api/article', article);
 
 const dbCluster = `mongodb+srv://RoshanGamage01:${config.get('databasePassword')}@unique.gve3jxs.mongodb.net/?retryWrites=true&w=majority`
-const dbLocal = "mongodb://localhost/Article"
+// const dbLocal = "mongodb://localhost/Article"
 
-mongoose.connect(dbLocal)
+mongoose.connect(dbCluster)
     .then(console.log("Database Connected."))
     .catch(error => console.log(error.message));
 

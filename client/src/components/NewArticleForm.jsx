@@ -5,17 +5,10 @@ import { useNavigate } from "react-router-dom";
 function NewArticleForm(props) {
   const [articleData, setArticleData] = useState({});
   const [file, setFile] = useState({});
-  const [fileName, setFileName] = useState("Select File");
+  const [fileName, setFileName] = useState("Select Cover Image");
   const navigate = useNavigate();
 
   async function btnPublishOnAction() {
-    const payload = {
-      title: articleData.title,
-      description: articleData.desc,
-      image: articleData.image,
-      writer: props.userId,
-    };
-
     const coverImage = file.image;
     const formData = new FormData();
 
@@ -66,7 +59,6 @@ function NewArticleForm(props) {
         name="desc"
       />
       <label className="get-cover-image">
-        Cover Image<br/>
         <input
           type={"file"}
           placeholder="image url"

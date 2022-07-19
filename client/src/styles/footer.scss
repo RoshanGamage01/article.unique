@@ -1,17 +1,67 @@
 footer {
-//     position: absolute;
-//     bottom: 0;
-//     height: 100px;
-//     width: 100%;
-//     background-color: black;
-//     color: white;
-//     padding: 20px 15em;
-//   section {
-//     display: flex;
-    
-//     .logo {
-//       font-size: 2em;
-//       font-weight: 500;
-//     }
-//   }
+    width: 100%;
+    background-color: black;
+    color: white;
+    padding: 20px;
+    .aboutus{
+        .aboutus-caption{
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .aboutus-desc{
+            font-size: 0.9em;
+        }
+        
+    }
+    .social-media{
+        list-style-type: none;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 20px 80px;
+    }
+    .copy{
+        text-align: center;
+        margin: 20px 0;
+    }
+}
+
+@media screen and (min-width: 768px){
+    footer{
+        padding: 10px 5em;
+        .footer-top{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            .aboutus{
+                .aboutus-desc{
+                    display: block;
+                    width: 70%;
+                }
+            }
+            .social-media{
+                flex-direction: column;
+            }
+        }
+    }
+
+}
+
+@media screen and (min-width: 1000px){
+    .footer-top{
+        padding: 20px 5em;
+        .aboutus{
+            .aboutus-desc{
+                width: 50%;
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 1200px){
+    .footer-top{
+        padding: 20px 10em;
+    }
 }

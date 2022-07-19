@@ -29,7 +29,7 @@ function Articleprev(props) {
           </div>
           <div className="article-prev-card-desc">
             {desc.slice(0, 100)}...{" "}
-            <strong style={{ cursor: "pointer" }}>Reade more &gt;</strong>
+            <strong style={{ cursor: "pointer" }}>Read more &gt;</strong>
           </div>
           <div className="profile-name">- {writer} -</div>
         </div>
