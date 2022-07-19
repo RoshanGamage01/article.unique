@@ -9,7 +9,7 @@ function Loginform() {
   const navigate = useNavigate();
 
   function btnLoginOnAction() {
-    axios.post('http://localhost:3000/api/login', data)
+    axios.post('https://article-unique.herokuapp.com/api/login', data)
         .then(result => {
           setRes(oldValue => ({...oldValue, data: result.data.message, status: result.status}))
           localStorage.setItem('auth-token', result.data.token);

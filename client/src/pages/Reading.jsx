@@ -15,7 +15,7 @@ function Reading() {
 
   async function getData() {
     await axios
-      .get(`http://localhost:3000/api/article/${linkProps.id}`, {headers: {"x-auth-token": localStorage.getItem("auth-token")}})
+      .get(`https://article-unique.herokuapp.com/api/article/${linkProps.id}`, {headers: {"x-auth-token": localStorage.getItem("auth-token")}})
       .then((response) => {
         const data = response.data;
         data.time = data.time.slice(0, 10);
@@ -26,6 +26,9 @@ function Reading() {
   return (
     <section>
       <Navbar />
+      <div className="msg" style={article.title === undefined ? {display: 'block'} : {display: 'none'}}>
+        Please wait..
+      </div>
       <div className="article">
         <div
           className="article-cover"

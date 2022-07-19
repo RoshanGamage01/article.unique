@@ -11,7 +11,7 @@ function Navbar() {
   useEffect(() => {
     if (isSignedIn()) {
       axios
-        .get("http://localhost:3000/api/user/me", {
+        .get("https://article-unique.herokuapp.com/api/user/me", {
           headers: { "x-auth-token": token },
         })
         .then((response) => {

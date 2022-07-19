@@ -26,7 +26,7 @@ function Registerform() {
     formData.append("profileImage", imageFile);
 
     try{
-          axios.post("http://localhost:3000/api/user/register", formData, {headers: {'Content-Type': 'multipart/form-data'}})
+          axios.post("https://article-unique.herokuapp.com/api/user/register", formData, {headers: {'Content-Type': 'multipart/form-data'}})
               .then((result) => {
                   setRes(oldValue => ({...oldValue, data: result.data.message, status: result.status}))
                   localStorage.setItem('auth-token', result.data.token)

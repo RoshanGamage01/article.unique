@@ -10,9 +10,8 @@ function Footer() {
         <div className="aboutus">
           <div className="aboutus-caption">About us</div>
           <div className="aboutus-desc">
-            Unique Article is bigest article web site in Sri Lanka.Unique
-            Article is bigest article web site in Sri Lanka.Unique Article is
-            bigest article web site in Sri Lanka.
+          uniquefeelings2020@gmail.com
+          https://www.facebook.com/uniqefeelings
           </div>
         </div>
         <ul className="social-media">

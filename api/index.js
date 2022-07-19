@@ -19,6 +19,8 @@ if(!config.get('jwtPrivateKey')){
     process.exit(1);
 }
 
+require('./startup/prod')(app);
+
 app.use(express.json());
 app.use(cors());
 app.use(fileUpload({

@@ -1,8 +1,6 @@
 section{
     .recent-article{
         width: 100%;
-        padding: 0 10px;
-        height: 35vh;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -16,11 +14,11 @@ section{
         .title{
             font-size: 1.3em;
             font-weight: bold;
+            padding-top: 10px;
         }
         .desc{
             margin: 10px 0;
             text-align: center;
-            margin-top: 10px;
             padding: 0 30px;
             font-size: 0.9em;
         }
@@ -36,6 +34,7 @@ section{
             cursor: pointer;
             border: 2px solid white;
             transition: 0.3s ease;
+            margin-bottom: 10px;
         }
         .btn:hover{
             border: 2px solid white;

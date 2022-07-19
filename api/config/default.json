@@ -1,4 +1,5 @@
 {
+    "name": "unique article",
     "jwtPrivateKey": "",
     "databasePassword": ""
 }
