@@ -1,27 +1,52 @@
-import "../styles/recent-article.scss"
-import {useState, useEffect} from "react"
-import {Link} from "react-router-dom"
-import axios from "axios"
+import "../styles/recent-article.scss";
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import axios from "axios";
+import loadingCoverImage from "../images/loading.gif";
 
-function RecentPost(){
-    const [data, setData] = useState({title: 'Loading..', description: 'Loading..', image: 'test', _id: 'test'})
+function RecentPost() {
+  const [data, setData] = useState({
+    title: "",
+    description: "",
+    image: "",
+    _id: "",
+  });
 
-    useEffect(()=>{
-        axios.get("https://article-unique.herokuapp.com/api/article/post/recent")
-            .then(response => {
-                setData(response.data)
-            })
-    }, [])
+  useEffect(() => {
+    axios
+      .get("http://localhost:3000/api/article/post/recent")
+      .then((response) => {
+        setData(response.data);
+      })
+      .catch((err) => {
+        console.log(err.response.data);
+      });
+  }, []);
 
-    return(
-        <section>
-            <div className="recent-article" style={{backgroundImage: `linear-gradient(rgba(0 0 0 / 25%), rgba(0 0 0 / 25%)), url(${data.image})`}}>
-                <div className="title">{data.title}</div>
-                <div className="desc">{data.description.slice(0, 100)}...Read more...</div>
-                <Link to={"/article/"+data._id} className="btn">Read full article</Link>
-            </div>
-        </section>
-    )
+  return (
+    <section>
+      {
+        data === undefined ? <div></div> :
+        <div
+          className="recent-article"
+          style={{
+            backgroundImage: `linear-gradient(rgba(0 0 0 / 30%), rgba(0 0 0 / 30%)), url(${!data.image ? loadingCoverImage : data.image})`,
+          }}
+        >
+          <div className="title">{!data.title ? "No articles to show" : data.title}</div>
+          <div
+            className="desc"
+            dangerouslySetInnerHTML={{
+              __html: !data.description ? "Refresh your browser or revisit laiter" : data.description.slice(0, 100) + ".. Read more..",
+            }}
+          ></div>
+          <Link to={"/article/" + data._id} className="btn">
+            Read full article
+          </Link>
+        </div>
+      }
+    </section>
+  );
 }
 
 export default RecentPost;

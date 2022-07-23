@@ -1,5 +1,5 @@
 const { Article, validate } = require("../models/Article");
-const { User } = require('../models/User');
+const { User } = require("../models/User");
 const _ = require("lodash");
 const express = require("express");
 const auth = require("../middlewares/auth");
@@ -7,35 +7,39 @@ const router = express.Router();
 const jwt = require("jsonwebtoken");
 const config = require("config");
 const path = require("path");
+const { default: mongoose } = require("mongoose");
 
 router.get("/:id", async (req, res) => {
-  const article = await Article.findById(req.params.id);
-  if (!article) return res.status(404).send("Can't find article");
+  try {
+    const article = await Article.findById(req.params.id);
+    if (!article) return res.status(404).send("Can't find article");
 
-  const user = await User.findById(article.writer)
-  if(!user) user.firstName = "none";
+    const user = await User.findById(article.writer);
+    if (!user) user.firstName = "none";
 
-  let response = {
-    title: article.title,
-    writer: user.firstName,
-    image: article.image,
-    description: article.description,
-    time: article.time,
-    category: article.category,
-    canEdit: false
+    let response = {
+      title: article.title,
+      writer: user.firstName,
+      image: article.image,
+      description: article.description,
+      time: article.time,
+      category: article.category,
+      canEdit: false,
+    };
+    try {
+      const decodedPayload = jwt.verify(
+        req.header("x-auth-token"),
+        config.get("jwtPrivateKey")
+      );
+
+      if (decodedPayload.id === article.writer) response.canEdit = true;
+      res.send(response);
+    } catch {
+      res.send(response);
+    }
+  } catch (error) {
+    res.status(400).send("Article not found");
   }
-  
-
-  try{
-    const decodedPayload = jwt.verify(req.header("x-auth-token"),config.get("jwtPrivateKey"));
-    
-    if(decodedPayload.id === article.writer) response.canEdit = true;
-    res.send(response);
-  }catch{
-    res.send(response)
-  }
-
-  
 });
 
 router.get("/", async (req, res) => {
@@ -46,25 +50,26 @@ router.get("/", async (req, res) => {
 });
 
 router.get("/post/recent/", async (req, res) => {
-  const article = await Article.find().sort({time: -1});
+  const article = await Article.find().sort({ time: -1 });
   if (!article) return res.status(404).send("Can't find article");
-  
-  res.send(article[0])
-})
+
+  res.send(article[0]);
+});
 
 router.post("/new", async (req, res) => {
   let coverImage;
   let uploadPath;
 
-  if(!req.files || Object.keys(req.files).length === 0){
-    return res.status(400).send('No files were uploaded');
+  if (!req.files || Object.keys(req.files).length === 0) {
+    return res.status(400).send("No files were uploaded");
   }
 
   coverImage = req.files.coverImage;
-  let fileName = new Date().getTime().toString() + path.extname(coverImage.name);
-  uploadPath = path.join(__dirname+"/../public","coverimages/")+fileName;
+  let fileName =
+    new Date().getTime().toString() + path.extname(coverImage.name);
+  uploadPath = path.join(__dirname + "/../public", "coverimages/") + fileName;
 
-  coverImage.mv(uploadPath, (err)=>{
+  coverImage.mv(uploadPath, (err) => {
     if (err) return res.status(500).send(err);
   });
 
@@ -72,15 +77,16 @@ router.post("/new", async (req, res) => {
   if (error) return res.status(400).send(error.details[0].message);
 
   const articleData = {
+    _id : mongoose.Types.ObjectId(),
     writer: req.body.writer,
     title: req.body.title,
     description: req.body.description,
     category: req.body.category,
-    image: `${req.protocol}://${req.get("host")}/coverimages/${fileName}`
-  }
+    image: `${req.protocol}://${req.get("host")}/coverimages/${fileName}`,
+  };
 
   const article = await new Article(
-    _.pick(articleData, ["writer", "title", "description", "image", "category"])
+    _.pick(articleData, ["_id", "writer", "title", "description", "image", "category"])
   );
 
   await article.save();
@@ -88,15 +94,15 @@ router.post("/new", async (req, res) => {
   res.send(`${article.title} is published`);
 });
 
-router.put('/update/:id', auth, async (req, res) => {
+router.put("/update/:id", auth, async (req, res) => {
   const article = await Article.findByIdAndUpdate(req.params.id, {
     title: req.body.title,
     description: req.body.description,
-    image: req.body.image
+    image: req.body.image,
   });
-  if(!article) res.status(400).send('Update Failed')
+  if (!article) res.status(400).send("Update Failed");
 
-  res.send(article)
-})
+  res.send(article);
+});
 
 module.exports = router;

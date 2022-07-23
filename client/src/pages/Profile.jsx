@@ -20,7 +20,7 @@ function Profile() {
 
   async function getData() {
     await axios
-      .get("https://article-unique.herokuapp.com/api/user/me", {
+      .get("http://localhost:3000/api/user/me", {
         headers: { "x-auth-token": localStorage.getItem("auth-token") },
       })
       .then((response) => {

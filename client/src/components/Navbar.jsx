@@ -7,21 +7,28 @@ function Navbar() {
   const navigate = useNavigate();
   const [profile, setProfile] = useState({});
   const token = localStorage.getItem("auth-token");
+  const [userExist, setUserExist] = useState(true);
 
   useEffect(() => {
-    if (isSignedIn()) {
+    if (isTokenAvilable()) {
       axios
-        .get("https://article-unique.herokuapp.com/api/user/me", {
+        .get("http://localhost:3000/api/user/me", {
           headers: { "x-auth-token": token },
         })
         .then((response) => {
+          setUserExist(true)
           setProfile(response.data.me);
         })
-        .catch((error) => console.log(error.response.data));
+        .catch((error) => {
+          localStorage.removeItem("auth-token")
+          setUserExist(false)
+        });
+    }else{
+      setUserExist(false)
     }
   }, []);
 
-  function isSignedIn() {
+  function isTokenAvilable() {
     if (token) return true;
     return false;
   }
@@ -42,13 +49,13 @@ function Navbar() {
         <li>
           <Link to="/article">Articles</Link>
         </li>
-        <li style={isSignedIn() ? { display: "none" } : { display: "block" }}>
+        <li style={userExist ? { display: "none" } : { display: "block" }}>
           <Link to="/register">Register</Link>
         </li>
-        <li style={isSignedIn() ? { display: "none" } : { display: "block" }}>
+        <li style={userExist ? { display: "none" } : { display: "block" }}>
           <Link to="/login">Log In</Link>
         </li>
-        <li style={isSignedIn() ? { display: "block" } : { display: "none" }}>
+        <li style={userExist ? { display: "block" } : { display: "none" }}>
           <div className="profile-link">
             <Link to="/me">
               <div
@@ -57,7 +64,8 @@ function Navbar() {
               ></div>
             </Link>
             <div className="navbar-profile-options">
-              <Link to="/me">{profile.firstName}'s Profile</Link>
+            <Link to={`/article/new/` + profile._id}>Create New Article</Link>
+              <Link to="/me">Your Profile</Link>
               <Link to="/" onClick={btnLogOutOnAction}>
                 Log out
               </Link>

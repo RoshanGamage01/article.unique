@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const Joi = require('joi');
 
 const articleSchema = new mongoose.Schema({
+    _id: mongoose.Schema.Types.ObjectId,
     writer: {
         type: String,
         minlength: 1,

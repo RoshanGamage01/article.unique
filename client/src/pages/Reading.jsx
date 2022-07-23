@@ -8,6 +8,7 @@ import "../styles/reading.scss";
 function Reading() {
   const linkProps = useParams();
   const [article, setArticle] = useState({});
+  const [error, setError] = useState()
 
   useEffect(() => {
     getData();
@@ -15,11 +16,14 @@ function Reading() {
 
   async function getData() {
     await axios
-      .get(`https://article-unique.herokuapp.com/api/article/${linkProps.id}`, {headers: {"x-auth-token": localStorage.getItem("auth-token")}})
+      .get(`http://localhost:3000/api/article/${linkProps.id}`, {headers: {"x-auth-token": localStorage.getItem("auth-token")}})
       .then((response) => {
         const data = response.data;
         data.time = data.time.slice(0, 10);
         setArticle(data);
+      }).catch(error => {
+        console.log(error.response.data)
+        setError(error.response.data)
       });
   }
 
@@ -27,7 +31,7 @@ function Reading() {
     <section>
       <Navbar />
       <div className="msg" style={article.title === undefined ? {display: 'block'} : {display: 'none'}}>
-        Please wait..
+        {!error ? "Loading Article.." : error}
       </div>
       <div className="article">
         <div

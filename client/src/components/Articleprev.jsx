@@ -9,7 +9,7 @@ function Articleprev(props) {
   const [writer, setWriter] = useState("")
 
   useEffect(()=>{
-    axios.get(`https://article-unique.herokuapp.com/api/user/${props.data.writer}`)
+    axios.get(`http://localhost:3000/api/user/${props.data.writer}`)
       .then(response => {
         setWriter(`${response.data.firstName} ${response.data.lastName}`)
       })
@@ -28,8 +28,7 @@ function Articleprev(props) {
             {props.data.time.slice(0, 10)}
           </div>
           <div className="article-prev-card-desc">
-            {desc.slice(0, 100)}...{" "}
-            <strong style={{ cursor: "pointer" }}>Read more &gt;</strong>
+            <p dangerouslySetInnerHTML={{__html: desc.slice(0, 100) + "<strong style={{ cursor: 'pointer' }}>.. Read more &gt;</strong>"}}></p>
           </div>
           <div className="profile-name">- {writer} -</div>
         </div>

@@ -9,7 +9,9 @@ const path = require('path');
 
 router.get("/me", auth, async (req, res) => {
   const me = await User.findOne({ _id: req.user.id }).select("-password");
+  if(!me) return res.status(404).send('user not found')
   const article = await Article.find({ writer: req.user.id });
+  if(!article) return res.status(404).send('articles not found')
 
   res.send({ me, article });
 });
