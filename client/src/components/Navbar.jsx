@@ -12,7 +12,7 @@ function Navbar() {
   useEffect(() => {
     if (isTokenAvilable()) {
       axios
-        .get("http://localhost:3000/api/user/me", {
+        .get("https://uniquearticle.herokuapp.com/api/user/me", {
           headers: { "x-auth-token": token },
         })
         .then((response) => {
@@ -37,6 +37,7 @@ function Navbar() {
     localStorage.removeItem("auth-token");
     navigate("/");
   }
+
   return (
     <nav>
       <span className="logo">

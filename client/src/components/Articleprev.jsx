@@ -9,7 +9,7 @@ function Articleprev(props) {
   const [writer, setWriter] = useState("")
 
   useEffect(()=>{
-    axios.get(`http://localhost:3000/api/user/${props.data.writer}`)
+    axios.get(`https://uniquearticle.herokuapp.com/api/user/${props.data.writer}`)
       .then(response => {
         setWriter(`${response.data.firstName} ${response.data.lastName}`)
       })

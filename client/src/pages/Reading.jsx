@@ -16,7 +16,7 @@ function Reading() {
 
   async function getData() {
     await axios
-      .get(`http://localhost:3000/api/article/${linkProps.id}`, {headers: {"x-auth-token": localStorage.getItem("auth-token")}})
+      .get(`https://uniquearticle.herokuapp.com/api/article/${linkProps.id}`, {headers: {"x-auth-token": localStorage.getItem("auth-token")}})
       .then((response) => {
         const data = response.data;
         data.time = data.time.slice(0, 10);

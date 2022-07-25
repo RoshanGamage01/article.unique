@@ -14,7 +14,7 @@ function RecentPost() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/api/article/post/recent")
+      .get("https://uniquearticle.herokuapp.com/api/article/post/recent")
       .then((response) => {
         setData(response.data);
       })
@@ -37,7 +37,7 @@ function RecentPost() {
           <div
             className="desc"
             dangerouslySetInnerHTML={{
-              __html: !data.description ? "Refresh your browser or revisit laiter" : data.description.slice(0, 100) + ".. Read more..",
+              __html: !data.description ? "Something went wrong, please try again later" : data.description.slice(0, 100) + ".. Read more..",
             }}
           ></div>
           <Link to={"/article/" + data._id} className="btn">

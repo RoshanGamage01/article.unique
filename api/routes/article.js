@@ -57,6 +57,9 @@ router.get("/post/recent/", async (req, res) => {
 });
 
 router.post("/new", async (req, res) => {
+  const { error } = validate(req.body);
+  if (error) return res.status(400).send(error.details[0].message);
+  
   let coverImage;
   let uploadPath;
 
@@ -65,16 +68,12 @@ router.post("/new", async (req, res) => {
   }
 
   coverImage = req.files.coverImage;
-  let fileName =
-    new Date().getTime().toString() + path.extname(coverImage.name);
-  uploadPath = path.join(__dirname + "/../public", "coverimages/") + fileName;
+  let fileName = new Date().getTime().toString() + path.extname(coverImage.name);
+  uploadPath = path.join(__dirname + "/../public", "images/") + fileName;
 
   coverImage.mv(uploadPath, (err) => {
     if (err) return res.status(500).send(err);
   });
-
-  const { error } = validate(req.body);
-  if (error) return res.status(400).send(error.details[0].message);
 
   const articleData = {
     _id : mongoose.Types.ObjectId(),
@@ -82,7 +81,7 @@ router.post("/new", async (req, res) => {
     title: req.body.title,
     description: req.body.description,
     category: req.body.category,
-    image: `${req.protocol}://${req.get("host")}/coverimages/${fileName}`,
+    image: `${req.protocol}://${req.get("host")}/images/${fileName}`,
   };
 
   const article = await new Article(
@@ -91,7 +90,7 @@ router.post("/new", async (req, res) => {
 
   await article.save();
 
-  res.send(`${article.title} is published`);
+  return res.send(`${article.title} is published`);
 });
 
 router.put("/update/:id", auth, async (req, res) => {

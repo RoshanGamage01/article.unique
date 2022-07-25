@@ -26,7 +26,7 @@ function Registerform() {
     formData.append("profileImage", imageFile);
 
     try{
-          axios.post("http://localhost:3000/api/user/register", formData, {headers: {'Content-Type': 'multipart/form-data'}})
+          axios.post("https://uniquearticle.herokuapp.com/api/user/register", formData, {headers: {'Content-Type': 'multipart/form-data'}})
               .then((result) => {
                   setRes(oldValue => ({...oldValue, data: result.data.message, status: result.status}))
                   localStorage.setItem('auth-token', result.data.token)
@@ -35,6 +35,7 @@ function Registerform() {
               })
               .catch((error) => {
                   setRes(oldValue => ({...oldValue, data: error.response.data, status: error.response.status}))
+                  // console.log(error.response.data)
               });
           }catch (err){
               console.log(err.message)
@@ -51,10 +52,7 @@ function Registerform() {
   return (
     <section className="form">
       <div className="title">Register</div>
-      <div
-        className={`alert ${res.status === 200 ? "alert-done" : "alert-error"}`}
-        style={res.data ? { display: "block" } : { display: "none" }}
-      >
+      <div className={`alert ${res.status === 200 ? "alert-done" : "alert-error"}`} style={res.data ? { display: "block" } : { display: "none" }}>
         {res.data}
       </div>
       <div className="form-main">
@@ -66,8 +64,7 @@ function Registerform() {
               placeholder="First Name"
               name="firstName"
               value={data.firstName || ""}
-              onChange={addValue}
-            />
+              onChange={addValue}/>
           </div>
           <div>
             <label>Last Name</label>

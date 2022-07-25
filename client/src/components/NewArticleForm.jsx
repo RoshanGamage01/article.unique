@@ -18,7 +18,7 @@ function NewArticleForm(props) {
     formData.append("writer", props.userId);
 
     await axios
-      .post("http://localhost:3000/api/article/new", formData, {headers: {'Content-Type': 'multipart/form-data'}})
+      .post("https://uniquearticle.herokuapp.com/api/article/new", formData, {headers: {'Content-Type': 'multipart/form-data'}})
       .then((response) => {
         console.log(response.data);
         navigate("/me");

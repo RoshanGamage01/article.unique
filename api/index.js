@@ -23,20 +23,24 @@ require('./startup/prod')(app);
 
 app.use(express.json());
 app.use(cors());
+
 app.use(fileUpload({
     useTempFiles: true,
     tempFileDir: path.join(__dirname, 'tmp')
 }))
+
 app.use(bodyParser.urlencoded({extended: false}));
+
 app.use(express.static('public'));
+
 app.use('/api/user', user);
 app.use('/api/login', auth);
 app.use('/api/article', article);
 
 const dbCluster = `mongodb+srv://RoshanGamage01:${config.get('databasePassword')}@unique.gve3jxs.mongodb.net/?retryWrites=true&w=majority`
-const dbLocal = "mongodb://localhost/Article"
+// const dbLocal = "mongodb://localhost/Article"
 
-mongoose.connect(dbLocal)
+mongoose.connect(dbCluster)
     .then(console.log("Database Connected."))
     .catch(error => console.log(error.message));
 
@@ -45,23 +49,3 @@ app.listen(port, () => {
     console.log(`App working on port ${port}...`);
 })
 
-app.post('/upload', function(req, res) {
-  let sampleFile;
-  let uploadPath;
-
-  if (!req.files || Object.keys(req.files).length === 0) {
-    return res.status(400).send('No files were uploaded.');
-  }
-
-  // The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
-  sampleFile = req.files.profileImage;
-  uploadPath = __dirname + '/images/' + sampleFile.name;
-
-  // Use the mv() method to place the file somewhere on your server
-  sampleFile.mv(uploadPath, function(err) {
-    if (err)
-      return res.status(500).send(err);
-
-    res.send('File uploaded!'+uploadPath);
-  });
-});

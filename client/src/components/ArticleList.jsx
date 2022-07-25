@@ -19,7 +19,7 @@ function ArticleList(props) {
 
   async function getArticles() {
     await axios
-      .get("http://localhost:3000/api/article/")
+      .get("https://uniquearticle.herokuapp.com/api/article/")
       .then((response) => {
         setArticles(response.data);
         setState(true)
