@@ -1,3 +1,3 @@
 # Unique Article Front-End (Reactjs)
 
-(preview)[https://uniquearticle.netlify.app/]
+[preview](https://uniquearticle.netlify.app/)
