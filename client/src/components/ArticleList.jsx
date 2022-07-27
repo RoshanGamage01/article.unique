@@ -19,7 +19,7 @@ function ArticleList(props) {
 
   async function getArticles() {
     await axios
-      .get("https://uniquearticle.herokuapp.com/api/article/")
+      .get("https://uniquearticle.azurewebsites.net/api/article/")
       .then((response) => {
         setArticles(response.data);
         setState(true)

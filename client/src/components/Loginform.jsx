@@ -9,7 +9,7 @@ function Loginform() {
   const navigate = useNavigate();
 
   function btnLoginOnAction() {
-    axios.post('https://uniquearticle.herokuapp.com/api/login', data)
+    axios.post('https://uniquearticle.azurewebsites.net/api/login', data)
         .then(result => {
           setRes(oldValue => ({...oldValue, data: result.data.message, status: result.status}))
           localStorage.setItem('auth-token', result.data.token);

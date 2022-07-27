@@ -12,7 +12,7 @@ function Navbar() {
   useEffect(() => {
     if (isTokenAvilable()) {
       axios
-        .get("https://uniquearticle.herokuapp.com/api/user/me", {
+        .get("https://uniquearticle.azurewebsites.net/api/user/me", {
           headers: { "x-auth-token": token },
         })
         .then((response) => {

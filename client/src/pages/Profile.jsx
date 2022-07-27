@@ -20,7 +20,7 @@ function Profile() {
 
   async function getData() {
     await axios
-      .get("https://uniquearticle.herokuapp.com/api/user/me", {
+      .get("https://uniquearticle.azurewebsites.net/api/user/me", {
         headers: { "x-auth-token": localStorage.getItem("auth-token") },
       })
       .then((response) => {

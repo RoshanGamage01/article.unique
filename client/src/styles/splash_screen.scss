@@ -1,0 +1,39 @@
+.splash-screen{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100vw;
+    height: 100%;
+    background: black;
+    background-position: center;
+    background-size: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 101;
+    transition: 0.3s ease;
+    animation: an 1s ease;
+    img{
+       mix-blend-mode: screen;
+    }
+}
+
+@keyframes an {
+    70%{
+        opacity: 100%;
+    }to{
+        opacity: 0;
+    }
+}
+
+@media screen and (min-width: 768px){
+    .splash-screen{
+        padding: 20%;
+    }
+}
+
+@media screen and (min-width: 1000px){
+    .splash-screen{
+        
+    }
+}

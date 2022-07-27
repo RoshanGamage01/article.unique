@@ -14,7 +14,7 @@ function RecentPost() {
 
   useEffect(() => {
     axios
-      .get("https://uniquearticle.herokuapp.com/api/article/post/recent")
+      .get("https://uniquearticle.azurewebsites.net/api/article/post/recent")
       .then((response) => {
         setData(response.data);
       })

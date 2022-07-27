@@ -9,7 +9,7 @@ function EditArticleForm(props) {
 
   useEffect(() => {
     axios
-      .get(`https://uniquearticle.herokuapp.com/api/article/${props.id}`, {
+      .get(`https://uniquearticle.azurewebsites.net/api/article/${props.id}`, {
         headers: { "x-auth-token": localStorage.getItem("auth-token") },
       })
       .then((response) => {
@@ -26,7 +26,7 @@ function EditArticleForm(props) {
   }
 
   async function btnUpdateArticleOnChange(){
-    await axios.put(`https://uniquearticle.herokuapp.com/api/article/update/${props.id}`, articleData, {headers: {"x-auth-token": localStorage.getItem("auth-token")}})
+    await axios.put(`https://uniquearticle.azurewebsites.net/api/article/update/${props.id}`, articleData, {headers: {"x-auth-token": localStorage.getItem("auth-token")}})
             .then(response => {
                 navigate("/article/"+props.id)
             })
